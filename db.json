@@ -1,0 +1,25 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": "What is the capital of France?",
+      "category": "General Knowledge",
+      "answer": "Paris",
+      "difficulty": "easy"
+    },
+    {
+      "id": 2,
+      "question": "Which planet is known as the Red Planet?",
+      "category": "Science",
+      "answer": "Mars",
+      "difficulty": "easy"
+    },
+    {
+      "id": 3,
+      "question": "Who was the first President of the USA?",
+      "category": "History",
+      "answer": "George Washington",
+      "difficulty": "medium"
+    }
+  ]
+}
