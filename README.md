@@ -8,3 +8,10 @@ CEWA MAHAN,
 # ALL RIGHTS RESERVED BY GROUP MONDAY (MORINGA SCHOOL) #
 
 # TM : MR. BARCLAY KOIN #
+
+
+# SECTIONS WORKED ON #
+ALLAN TOO - QuestionForm.jsx and QuestionList.jsx
+ADNAN RASHID-App.jsx
+ALVIN SWALAH-Highscore.jsx and Quiz.jsx
+CEWA MAHAN-Home.jsx and NavBar.jsx
