@@ -12,6 +12,6 @@ CEWA MAHAN,
 
 # SECTIONS WORKED ON #
 ALLAN TOO - QuestionForm.jsx and QuestionList.jsx
-ADNAN RASHID-App.jsx
+ADNAN RASHID-App.jsx 
 ALVIN SWALAH-Highscore.jsx and Quiz.jsx
 CEWA MAHAN-Home.jsx and NavBar.jsx

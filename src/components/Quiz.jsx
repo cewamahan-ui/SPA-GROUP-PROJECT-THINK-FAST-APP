@@ -6,13 +6,14 @@ const decodeHtml = (html) => {
   txt.innerHTML = html
   return txt.value
 }
-
+//initial states
 export default function Quiz({ externalQuestions }) {
   const navigate = useNavigate()
   const [current, setCurrent] = useState(0)
   const [answers, setAnswers] = useState([])
   const [selected, setSelected] = useState(null)
 
+  //side effects of the useStates
   useEffect(() => {
     setAnswers(new Array(externalQuestions.length).fill(null))
   }, [externalQuestions.length])

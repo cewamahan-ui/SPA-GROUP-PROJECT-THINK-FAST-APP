@@ -18,6 +18,7 @@ export default function HighScore() {
     }
   }, [])
 
+  //event listening
   const saveScore = (e) => {
     e.preventDefault()
     if (!playerName.trim()) return
