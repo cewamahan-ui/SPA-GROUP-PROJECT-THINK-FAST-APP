@@ -7,6 +7,8 @@ export default function HighScore() {
   const [lastScore, setLastScore] = useState(null)
   const [playerName, setPlayerName] = useState('')
 
+
+  //side effect of the useStates listening to the scores and lastscore
   useEffect(() => {
     const savedScores = JSON.parse(localStorage.getItem('thinkfast_scores') || '[]')
     setScores(savedScores.sort((a, b) => b.score - a.score).slice(0, 10))
@@ -42,7 +44,7 @@ export default function HighScore() {
   return (
     <div className="highscore">
       <button className="back-arrow" onClick={() => navigate('/')}>←</button>
-      <h1>🏆 High Scores</h1>
+      <h1> High Scores</h1>
       
       {lastScore && (
         <div className="save-score-section">

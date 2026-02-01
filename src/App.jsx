@@ -62,6 +62,7 @@ function App() {
           <Route path="/quiz" element={<Quiz externalQuestions={externalQuestions} />} />
           <Route path="/highscore" element={<HighScore />} />
           <Route path="/questions" element={<QuestionList questions={questions} onDelete={deleteQuestion} onUpdate={updateQuestion} />} />
+          <Route path="/add-question" element={<QuestionForm onAdd={addQuestion} />} />
         </Routes>
       </div>
     </BrowserRouter>
