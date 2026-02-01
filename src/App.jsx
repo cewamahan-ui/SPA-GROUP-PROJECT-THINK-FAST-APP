@@ -26,15 +26,26 @@ function App() {
     setExternalQuestions(data.results || [])
   }
 
-  // POST to json-server
+  // adding question to json-server
   const addQuestion = (newQ) => {
+    console.log('Adding question:', newQ)
     fetch('http://localhost:3001/questions', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newQ)
     })
-      .then(res => res.json())
-      .then(data => setQuestions([...questions, data]))
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to add question')
+        return res.json()
+      })
+      .then(data => {
+        console.log('Question added:', data)
+        setQuestions(prevQuestions => [...prevQuestions, data])
+      })
+      .catch(err => {
+        console.error('Error adding question:', err)
+        alert('Failed to add question. Make sure JSON server is running (npm run server)')
+      })
   }
 
   // DELETE from json-server
@@ -42,15 +53,18 @@ function App() {
     fetch(`http://localhost:3001/questions/${id}`, { method: 'DELETE' })
       .then(() => setQuestions(questions.filter(q => q.id !== id)))
   }
-
+ 
   // UPDATE to json-server
   const updateQuestion = (id, updated) => {
+    const updatedWithId = { ...updated, id }
     fetch(`http://localhost:3001/questions/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updated)
+      body: JSON.stringify(updatedWithId)
     })
-      .then(() => setQuestions(questions.map(q => q.id === id ? updated : q)))
+      .then(res => res.json())
+      .then(data => setQuestions(questions.map(q => q.id === id ? data : q)))
+      .catch(err => console.error('Update failed:', err))
   }
 
   return (
@@ -61,7 +75,7 @@ function App() {
           <Route path="/" element={<Home fetchExternal={fetchExternalQuestions} />} />
           <Route path="/quiz" element={<Quiz externalQuestions={externalQuestions} />} />
           <Route path="/highscore" element={<HighScore />} />
-          <Route path="/questions" element={<QuestionList questions={questions} onDelete={deleteQuestion} onUpdate={updateQuestion} />} />
+          <Route path="/questions" element={<QuestionList questions={questions} onDelete={deleteQuestion} onUpdate={updateQuestion} onAdd={addQuestion} />} />
         </Routes>
       </div>
     </BrowserRouter>

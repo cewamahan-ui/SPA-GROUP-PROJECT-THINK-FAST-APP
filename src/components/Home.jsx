@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+//quiz configuration
 export default function Home({ fetchExternal }) {
   const navigate = useNavigate()
   const [difficulty, setDifficulty] = useState('easy')
   const [amount, setAmount] = useState(5)
-  const [useTimer, setUseTimer] = useState(false)
+    
+  // State Variable
   const [loading, setLoading] = useState(false)
   const [loadingCategory, setLoadingCategory] = useState(null)
 
@@ -40,21 +42,14 @@ export default function Home({ fetchExternal }) {
     setLoading(true)
     setLoadingCategory(id)
     
-    // Determine if timer should be enabled
-    // Easy: no timer (default), Medium: optional, Hard: always on
-    let timerEnabled = useTimer
-    if (difficulty === 'hard') {
-      timerEnabled = true
-    }
-    
-    await fetchExternal(id, difficulty, amount, timerEnabled)
+    // No timer - just fetch questions
+    await fetchExternal(id, difficulty, amount, false)
     
     // Store category name for high score
     const category = categories.find(c => c.id === id)
     localStorage.setItem('current_quiz_info', JSON.stringify({
       category: category?.name || 'Unknown',
-      difficulty: difficulty,
-      useTimer: timerEnabled
+      difficulty: difficulty
     }))
     
     setLoading(false)
@@ -82,27 +77,7 @@ export default function Home({ fetchExternal }) {
             <option value={15}>15</option>
           </select>
         </label>
-        {difficulty !== 'easy' && (
-          <label className="timer-option">
-            <input
-              type="checkbox"
-              checked={useTimer}
-              onChange={e => setUseTimer(e.target.checked)}
-            />
-            Enable Timer
-          </label>
-        )}
       </div>
-      
-      {difficulty === 'easy' && (
-        <p className="timer-info">⏱️ Timer disabled for Easy mode</p>
-      )}
-      {difficulty === 'medium' && useTimer && (
-        <p className="timer-info">⏱️ Timer enabled (10 seconds per question)</p>
-      )}
-      {difficulty === 'hard' && (
-        <p className="timer-info">⏱️ Timer enabled (10 seconds per question)</p>
-      )}
 
       <h2>Select a Category</h2>
       <div className="categories">

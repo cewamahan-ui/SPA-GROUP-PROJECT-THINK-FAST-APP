@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom'
 
 export default function HighScore() {
   const navigate = useNavigate()
+  //state management
   const [scores, setScores] = useState([])
   const [lastScore, setLastScore] = useState(null)
   const [playerName, setPlayerName] = useState('')
 
+  //loading scores
   useEffect(() => {
     const savedScores = JSON.parse(localStorage.getItem('thinkfast_scores') || '[]')
     setScores(savedScores.sort((a, b) => b.score - a.score).slice(0, 10))
@@ -17,7 +19,7 @@ export default function HighScore() {
       localStorage.removeItem('last_quiz_score')
     }
   }, [])
-
+//saving new scores
   const saveScore = (e) => {
     e.preventDefault()
     if (!playerName.trim()) return
