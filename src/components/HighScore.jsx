@@ -8,7 +8,8 @@ export default function HighScore() {
   const [playerName, setPlayerName] = useState('')
 
 
-  //side effect of the useStates listening to the scores and lastscore
+  //side effect of the useStates listening to the scores and lastscore and retrieving the previous data
+  
   useEffect(() => {
     const savedScores = JSON.parse(localStorage.getItem('thinkfast_scores') || '[]')
     setScores(savedScores.sort((a, b) => b.score - a.score).slice(0, 10))

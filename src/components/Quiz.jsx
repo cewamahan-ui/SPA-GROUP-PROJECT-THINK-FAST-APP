@@ -13,7 +13,8 @@ export default function Quiz({ externalQuestions }) {
   const [answers, setAnswers] = useState([])
   const [selected, setSelected] = useState(null)
 
-  //side effects of the useStates
+  //side effects of the useStates like creating an answers array based on the number of questions being made
+  
   useEffect(() => {
     setAnswers(new Array(externalQuestions.length).fill(null))
   }, [externalQuestions.length])
